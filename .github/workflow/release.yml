@@ -12,6 +12,7 @@ on:
 
 jobs:
   Build:
+    name: Build Apk Task
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
