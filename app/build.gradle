@@ -43,14 +43,14 @@ android {
     signingConfigs {
         // keytool -genkey -alias android -keypass android -keyalg RSA -keysize 2048 -validity 36500 -keystore infinity.p12 -storepass xxx.jks
         debug {
-            storeFile file('release.jks')
+            storeFile file('signingKey.jks')
             storePassword 'androidci'
             keyAlias 'android'
             keyPassword 'android'
         }
 
         release {
-            storeFile file('release.jks')
+            storeFile file('signingKey.jks')
             storePassword 'androidci'
             keyAlias 'android'
             keyPassword 'android'
