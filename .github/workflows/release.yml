@@ -40,11 +40,11 @@ jobs:
         with:
           releaseDirectory: app/build/outputs/apk/google/release
           signingKeyBase64: ${{ secrets.KEY_BASE64 }}
-          alias: ${{ secrets.ALIAS }}
+          alias: ${{ secrets.KEY_ALIAS }}
           keyStorePassword: ${{ secrets.STOREPASS }}
           keyPassword: ${{ secrets.KEYPASS }}
-        # env: 设置构建工具版本(此步骤为可选)
-         # BUILD_TOOLS_VERSION: "30.0.2"
+        env: # 设置构建工具版本(此步骤为可选)
+          BUILD_TOOLS_VERSION: "30.0.2"
 
       #- name: Handle Signed APK
        # run: bash ./operate-signed-apk.sh
