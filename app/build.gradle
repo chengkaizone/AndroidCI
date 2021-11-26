@@ -3,25 +3,83 @@ plugins {
 }
 
 android {
-    compileSdkVersion 31
-    buildToolsVersion "31.0.0"
+    compileSdkVersion 30
 
     defaultConfig {
         applicationId "com.lineying.androidci"
         minSdkVersion 21
-        targetSdkVersion 31
-        versionCode 1
-        versionName "1.0"
+        targetSdkVersion 30
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
 
+        vectorDrawables {
+            useSupportLibrary true
+        }
+        multiDexEnabled true
+        /*ndk {
+            abiFilters *//* "armeabi-v7a" *//* "arm64-v8a"
+        }*/
+
+        flavorDimensions "app"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
+
     buildTypes {
+        debug {
+            debuggable true
+            minifyEnabled false
+            signingConfig signingConfigs.debug
+        }
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            // signingConfig signingConfigs.release
         }
     }
+
+    signingConfigs {
+        // keytool -genkey -alias android -keypass android -keyalg RSA -keysize 2048 -validity 36500 -keystore infinity.p12 -storepass xxx.jks
+        debug {
+            storeFile file('release.jks')
+            storePassword 'androidci'
+            keyAlias 'android'
+            keyPassword 'android'
+        }
+
+        release {
+            storeFile file('release.jks')
+            storePassword 'androidci'
+            keyAlias 'android'
+            keyPassword 'android'
+        }
+    }
+
+    productFlavors {
+        google {
+            // applicationId "com.lineying.androidci"
+        }
+    }
+
+    applicationVariants.all { variant ->
+        def buildType = variant.buildType.name
+        switch (buildType) {
+            case "beta":
+            case "release":
+                def flavorName = variant.flavorName
+                def date = new Date()
+                def createTime = date.format("yyMMdd_HHmmss")
+
+                variant.outputs.all { output ->
+                    def fileName = "${flavorName}_${buildType}_${defaultConfig.versionCode}_v${versionName}_${createTime}"
+                    outputFileName = "app-${fileName}.apk"
+                }
+        }
+
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -30,6 +88,7 @@ android {
 
 dependencies {
 
+    //noinspection GradleCompatible
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'com.android.support.constraint:constraint-layout:2.0.4'
     testImplementation 'junit:junit:4.+'
