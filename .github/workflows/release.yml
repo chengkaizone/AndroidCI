@@ -9,7 +9,7 @@ on:
   push:
     branches: [ master ]
     paths:
-      - 'app/buildVersion.gradle'
+      - 'buildVersion.gradle'
 
 jobs:
   Build:
