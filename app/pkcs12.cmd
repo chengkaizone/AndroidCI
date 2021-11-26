@@ -4,3 +4,6 @@ $ keytool -importkeystore -srckeystore release.jks -destkeystore release.p12 -de
 
 # 文件生成base64内容
 $ openssl base64 -in release.jks -out release_base64.txt
+
+签名文件生成base64内容
+openssl base64 < signingKey.jks | tr -d '\n' | tee signingKey.jks.base64.txt
