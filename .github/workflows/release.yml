@@ -47,8 +47,8 @@ jobs:
         env: # 设置构建工具版本(此步骤为可选)
           BUILD_TOOLS_VERSION: "30.0.2"
 
-      - name: Handle Signed APK
-        run: bash ./signed-apk-handle.sh
+      #- name: Handle Signed APK
+       # run: bash ./signed-apk-handle.sh
 
       - name: Upload APK
         uses: luochongfei/up2qn@master
@@ -57,7 +57,7 @@ jobs:
           zone: 华南
           access_key: ${{ secrets.AK }}
           secret_key: ${{ secrets.SK }}
-          local_dir: update/apk/
+          local_dir: app/build/outputs/apk/google/release #update/apk/
           target_dir: update/apk/
 
       - uses: actions/setup-python@v2

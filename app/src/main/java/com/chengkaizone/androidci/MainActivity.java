@@ -1,4 +1,4 @@
-package com.lineying.androidci;
+package com.chengkaizone.androidci;
 
 import android.os.Bundle;
 
