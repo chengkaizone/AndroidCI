@@ -37,18 +37,18 @@ jobs:
 
       - name: Signing Release APK
         uses: r0adkll/sign-android-release@v1
-        id: sign_app # 定义ID可用于在后面获取相关属性
+        id: sign_app # 定义ID可用于在后面获取相关属性 - 比如路径相关信息
         with:
           releaseDirectory: app/build/outputs/apk/google/release
-          signingKeyBase64: ${{ secrets.KEY_BASE64 }}
+          signingKeyBase64: ${{ secrets.KEY_BASE64 }} # 生成的文件内容中间不能有任何换行符
           alias: ${{ secrets.KEY_ALIAS }}
           keyStorePassword: ${{ secrets.STOREPASS }}
           keyPassword: ${{ secrets.KEYPASS }}
         env: # 设置构建工具版本(此步骤为可选)
           BUILD_TOOLS_VERSION: "30.0.2"
 
-      #- name: Handle Signed APK
-       # run: bash ./operate-signed-apk.sh
+      - name: Handle Signed APK
+        run: bash ./signed-apk-handle.sh
 
       - name: Upload APK
         uses: luochongfei/up2qn@master
@@ -57,7 +57,7 @@ jobs:
           zone: 华南
           access_key: ${{ secrets.AK }}
           secret_key: ${{ secrets.SK }}
-          local_dir: app/build/outputs/apk/google/release
+          local_dir: update/apk/
           target_dir: update/apk/
 
       - uses: actions/setup-python@v2
@@ -65,6 +65,7 @@ jobs:
           python-version: '3.6' # Version range or exact version of a Python version to use, using SemVer's version range syntax
           architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
 
+      #
       - name: Notification App Updated
         run: python3 update_notification.py
 
