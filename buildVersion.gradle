@@ -1,4 +1,4 @@
 ext {
     versionCode = 10000
-    versionName = "1.0.12"
+    versionName = "1.0.13"
 }

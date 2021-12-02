@@ -57,7 +57,7 @@ jobs:
           zone: 华南
           access_key: ${{ secrets.AK }}
           secret_key: ${{ secrets.SK }}
-          local_dir: app/build/outputs/apk/google/release #update/apk/
+          local_dir: update/apk/
           target_dir: update/apk/
 
       - uses: actions/setup-python@v2
