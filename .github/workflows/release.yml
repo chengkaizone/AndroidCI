@@ -76,7 +76,7 @@ jobs:
       - name: Upload info.json
         uses: luochongfei/up2qn@master
         with:
-          bucket: lemurbrowser
+          bucket: linecloud
           zone: 华南
           access_key: ${{ secrets.AK }}
           secret_key: ${{ secrets.SK }}
