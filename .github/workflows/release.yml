@@ -57,8 +57,8 @@ jobs:
           zone: 华南
           access_key: ${{ secrets.AK }}
           secret_key: ${{ secrets.SK }}
-          local_dir: update/apk/
-          target_dir: update/apk/
+          local_dir: upload/apk/
+          target_dir: upload/apk/
 
       - uses: actions/setup-python@v2
         with:
