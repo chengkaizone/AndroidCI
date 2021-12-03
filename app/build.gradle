@@ -72,7 +72,7 @@ android {
                 def createTime = date.format("yyMMdd_HHmmss")
 
                 variant.outputs.all { output ->
-                    def fileName = "${flavorName}_${buildType}_${defaultConfig.versionCode}_v${versionName}_${createTime}"
+                    def fileName = "${flavorName}_v${defaultConfig.versionCode}"
                     outputFileName = "app-${fileName}.apk"
                 }
         }
